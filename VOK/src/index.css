@@ -1,0 +1,40 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Parkinsans:wght@300..800&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Nunito:ital,wght@0,200..1000;1,200..1000&family=Parkinsans:wght@300..800&family=Quicksand:wght@300..700&display=swap');
+@import "tailwindcss";
+
+
+@theme{
+    --font-nunito:'nunito', 'sans-serif';
+    --font-quicksand:'quicksannd','sans-serif'
+}
+
+@layer base{
+    @font-face {
+        font-family: 'brandon-black';
+        src: url(/src/assets/font/HvDTrial_Brandon_Text_Black-BF6514e9eb54e57.otf) format(otf);
+    }
+}
+
+/* .overlay {
+  background-color: rgba(0, 0, 0, .95) !important;
+  z-index: 20 !important;
+} */
+
+@keyframes floating {
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  50% {
+    transform: translateY(-20px) translateX(10px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+.animate-floating {
+  animation-name: floating;
+  animation-timing-function: ease-in-out;
+  animation-iteration-count: infinite;
+}
+
