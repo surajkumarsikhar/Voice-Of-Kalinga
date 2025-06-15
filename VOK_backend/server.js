@@ -13,7 +13,7 @@ const app = express();
 
 // ✅ Proper CORS setup
 app.use(cors({
-  origin: 'https://voice-of-kalinga-site.vercel.app/', // your frontend URL
+  origin: 'https://voice-of-kalinga-site.vercel.app', // your frontend URL
   credentials: true // ✅ allow cookies to be sent
 }));
 
