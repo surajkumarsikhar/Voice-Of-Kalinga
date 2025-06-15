@@ -62,8 +62,8 @@ const Video = () => {
           opacity: 0,
           scrollTrigger: {
             trigger: "#page",
-            start: `${18 + i * 10}% top`,
-            end: `${20 + i * 10}% end`,
+            start: `${18 + i * 5}% top`,
+            end: `${20 + i * 2}% end`,
             scrub: 2,
           },
         });
