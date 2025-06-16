@@ -21,7 +21,7 @@ const AdminLogin = () => {
       );
 
       // ✅ Login success – redirect to dashboard
-      navigate("/admin-dashboard");
+      // navigate("/admin-dashboard");
     } catch (err) {
       setError(err.response?.data?.error || "Login failed");
     }

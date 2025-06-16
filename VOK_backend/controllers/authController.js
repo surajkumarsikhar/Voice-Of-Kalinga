@@ -5,7 +5,7 @@ const JWT_SECRET = process.env.JWT_SECRET;
 const COOKIE_OPTIONS = {
   httpOnly: true,
   secure: true, // Set to true in production (with HTTPS)
-  sameSite: "lax",
+  sameSite: "None",
   maxAge: 24 * 60 * 60 * 1000
 };
 
