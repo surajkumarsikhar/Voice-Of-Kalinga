@@ -4,7 +4,7 @@ const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 const COOKIE_OPTIONS = {
   httpOnly: true,
-  secure: false, // Set to true in production (with HTTPS)
+  secure: true, // Set to true in production (with HTTPS)
   sameSite: 'lax',
   maxAge: 24 * 60 * 60 * 1000
 };
