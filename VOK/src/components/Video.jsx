@@ -16,7 +16,7 @@ const Video = () => {
       ScrollTrigger.create({
         trigger: containerRef.current,
         start: "top top",
-        end: "+=450%",
+        end: "+=140%",
         pin: true,
         scrub: true,
       });
@@ -28,7 +28,7 @@ const Video = () => {
         scrollTrigger: {
           trigger: "#page",
           start: "top 0%",
-          end: "top -100%",
+          end: "top -60%",
           scrub: 2,
         },
       });
@@ -49,7 +49,7 @@ const Video = () => {
         scrollTrigger: {
           trigger: "#page",
           start: "top 0%",
-          end: "top -250%",
+          end: "top -130%",
           scrub: 2,
         },
       }
@@ -62,9 +62,10 @@ const Video = () => {
           opacity: 0,
           scrollTrigger: {
             trigger: "#page",
-            start: `${18 + i * 5}% top`,
-            end: `${20 + i * 2}% end`,
+            start: `${13 + i * 4}% top`,
+            end: `${15 + i * 2}% end`,
             scrub: 2,
+            markers:true
           },
         });
       });
@@ -100,10 +101,10 @@ const Video = () => {
           </h1>
 
           <div className="flex flex-wrap justify-center gap-2 text-white text-xl md:text-2xl lg:text-3xl ">
-            <span className="motto-word font-quicksand">Unheard</span>
-            <span className="motto-word font-quicksand">Stories,</span>
-            <span className="motto-word font-quicksand">Documented</span>
-            <span className="motto-word font-quicksand">Voices.</span>
+            <span className="motto-word font-quicksand">Unheard Stories,</span>
+            {/* <span className="motto-word font-quicksand">Stories,</span> */}
+            <span className="motto-word font-quicksand">Documented Voices.</span>
+            {/* <span className="motto-word font-quicksand">Voices.</span> */}
           </div>
         </div>
       </div>
