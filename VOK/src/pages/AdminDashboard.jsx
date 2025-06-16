@@ -51,7 +51,7 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     axios
-      .get(`${baseURL}/admin/verify`, { withCredentials: true })
+      .get(`${baseURL}/admin/verify`)
       .then(() => {
         fetchBlogs();
       })
