@@ -3,15 +3,15 @@ import axios from "axios";
 import { LogOut } from "lucide-react";
 const baseURL = import.meta.env.VITE_API_BASE_URL;
 
-// Ensure credentials (cookies) are sent with every request
 axios.defaults.withCredentials = true;
 
 const AdminDashboard = () => {
   const [approvedBlogs, setApprovedBlogs] = useState([]);
   const [unapprovedBlogs, setUnapprovedBlogs] = useState([]);
   const [selectedBlog, setSelectedBlog] = useState(null);
-  const [activeTab, setActiveTab] = useState("unapproved"); // "approved" | "unapproved"
+  const [activeTab, setActiveTab] = useState("unapproved");
   const [loading, setLoading] = useState(true);
+  const [verifying, setVerifying] = useState(true);
 
   const fetchBlogs = async () => {
     try {
@@ -50,12 +50,25 @@ const AdminDashboard = () => {
   };
 
   useEffect(() => {
-    fetchBlogs();
+    axios
+      .get(`${baseURL}/admin/verify`, { withCredentials: true })
+      .then(() => {
+        fetchBlogs();
+      })
+      .catch(() => {
+        window.location.href = "/admin";
+      })
+      .finally(() => {
+        setVerifying(false);
+      });
   }, []);
+
+  if (verifying) {
+    return <div className="text-white text-center pt-32">Verifying admin session...</div>;
+  }
 
   return (
     <div className="min-h-screen bg-black text-white px-6 pt-28 pb-10 font-nunito">
-      {/* Header */}
       <div className="flex justify-between items-center mb-8">
         <h1 className="text-4xl font-bold">Admin Dashboard</h1>
         <button
@@ -67,7 +80,6 @@ const AdminDashboard = () => {
         </button>
       </div>
 
-      {/* Centered Tab Switcher */}
       <div className="flex justify-center gap-4 mb-8">
         <button
           onClick={() => setActiveTab("unapproved")}
@@ -91,7 +103,6 @@ const AdminDashboard = () => {
         </button>
       </div>
 
-      {/* Content */}
       {loading ? (
         <p className="text-white/70 text-center">Loading blogs...</p>
       ) : activeTab === "unapproved" ? (
@@ -139,7 +150,6 @@ const AdminDashboard = () => {
         </div>
       )}
 
-      {/* Modal for full blog */}
       {selectedBlog && (
         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
           <div className="bg-white text-black p-8 rounded-xl max-w-xl w-full relative shadow-lg">
