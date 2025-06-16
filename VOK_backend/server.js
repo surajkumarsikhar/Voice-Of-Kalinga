@@ -11,6 +11,9 @@ require('./config/db');
 
 const app = express();
 
+// ✅ Add this BEFORE any cookie-related logic
+app.set("trust proxy", 1); // <-- This line is IMPORTANT for cookies to work on Render with HTTPS
+
 // ✅ Proper CORS setup
 app.use(cors({
   origin: 'https://voice-of-kalinga-site.vercel.app', // your frontend URL
