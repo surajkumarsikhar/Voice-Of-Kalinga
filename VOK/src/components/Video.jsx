@@ -65,7 +65,7 @@ const Video = () => {
             start: `${13 + i * 4}% top`,
             end: `${15 + i * 2}% end`,
             scrub: 2,
-            markers:true
+            // markers:true
           },
         });
       });
