@@ -43,7 +43,7 @@ const Ourvision = () => {
 
       {/* ScrollReveal Text Box */}
       <div className="relative z-10 w-full max-w-4xl sm:max-w-5xl px-4 sm:px-10">
-        <div className="bg-black/30 sm:bg-black/20 backdrop-blur-md rounded-2xl shadow-2xl p-6 sm:p-10 text-sm sm:text-base lg:text-lg font-light tracking-wide leading-relaxed sm:leading-loose text-white text-justify font-nunito whitespace-pre-wrap">
+        <div className="bg-black/30 sm:bg-black/20 rounded-2xl shadow-2xl p-6 sm:p-10 text-sm sm:text-base lg:text-lg font-light tracking-wide leading-relaxed sm:leading-loose text-white text-justify font-nunito whitespace-pre-wrap">
           <ScrollReveal
             baseOpacity={0}
             enableBlur={true}

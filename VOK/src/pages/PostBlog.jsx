@@ -102,7 +102,7 @@ const PostBlog = () => {
             <button
               type="submit"
               disabled={submitting}
-              className="w-full bg-white/10 border border-white/20 text-white font-bold py-3 rounded-xl shadow-lg hover:bg-white/20 backdrop-blur-lg transition-all"
+              className="w-full bg-white/10 border border-white/20 text-black md:text-white font-bold py-3 rounded-xl shadow-lg hover:bg-white/20 backdrop-blur-lg transition-all"
             >
               {submitting ? "Submitting..." : "Submit Your Story"}
             </button>
