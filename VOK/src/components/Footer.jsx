@@ -33,10 +33,10 @@ const Footer = () => {
           <div>
             <h3 className="text-lg font-semibold mb-3 font-nunito">Follow Us</h3>
             <div className="flex justify-center gap-6 text-xl">
-              <a href="https://instagram.com/yourhandle" target="_blank" rel="noreferrer" className="hover:text-amber-400">
+              <a href="https://www.instagram.com/voiceofkalinga/" target="_blank" rel="noreferrer" className="hover:text-amber-400">
                 <FaInstagram />
               </a>
-              <a href="https://youtube.com/yourchannel" target="_blank" rel="noreferrer" className="hover:text-amber-400">
+              <a href="https://www.youtube.com/channel/UCp--FI5cLQ31Gz_HyQFiTvw" target="_blank" rel="noreferrer" className="hover:text-amber-400">
                 <FaYoutube />
               </a>
               <a href="https://x.com/yourhandle" target="_blank" rel="noreferrer" className="hover:text-amber-400">

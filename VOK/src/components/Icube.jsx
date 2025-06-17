@@ -1,8 +1,8 @@
-import React, { useRef, useEffect } from "react";
+import React, { useRef, useEffect, useState } from "react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import TextPressure from "../style/TextPressure";
-import vok_ani from "../assets/videos/vok_ani.mp4"
+import vok_ani from "../assets/videos/vok_ani.mp4";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -10,61 +10,66 @@ const Icube = () => {
   const sectionRef = useRef(null);
   const textRef = useRef(null);
   const videoRef = useRef(null);
+  const [vh, setVh] = useState(window.innerHeight);
 
   useEffect(() => {
+    const updateHeight = () => {
+      setVh(window.innerHeight);
+    };
+    window.addEventListener("resize", updateHeight);
+    updateHeight();
+
     const el = sectionRef.current;
     const text = textRef.current;
     const video = videoRef.current;
 
-    // Create a timeline for synchronized animations
+    const isMobile = window.innerWidth < 640;
+
     const tl = gsap.timeline({
       scrollTrigger: {
         trigger: el,
         start: "top top",
-        end: "top -150%",
+        end: isMobile ? "top -100%" : "top -150%",
         scrub: true,
         pin: true,
-      }
+      },
     });
 
-    // Add text animation to timeline
-    tl.fromTo(
-      text,
-      { x: "100vw" },
-      { x: "-100vw", ease: "none" },
-      0
-    );
+    // Text animation
+    tl.fromTo(text, { x: "100vw" }, { x: "-100vw", ease: "none" }, 0);
 
-    // Add video scroll scrub animation
+    // Video animation
     if (video) {
       tl.fromTo(
         video,
-        { 
+        {
           scale: 1,
           opacity: 0.5,
-          filter: "brightness(0.7) contrast(1.2)"
+          filter: "brightness(0.7) contrast(1.2)",
         },
-        { 
-          scale: 1.2,
-          opacity: 0.1,
+        {
+          scale: 1.1,
+          opacity: 0.15,
           filter: "brightness(1) contrast(1)",
-          ease: "none"
+          ease: "none",
         },
         0
       );
     }
 
     return () => {
-      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+      window.removeEventListener("resize", updateHeight);
     };
   }, []);
 
   return (
     <div
       ref={sectionRef}
-      className="w-full h-screen flex items-center justify-center bg-black overflow-hidden relative"
+      style={{ height: `${vh}px` }}
+      className="w-full flex items-center justify-center bg-black overflow-hidden relative"
     >
-      {/* Video Background */}
+      {/* Background Video */}
       <div className="absolute inset-0 z-0">
         <video
           ref={videoRef}
@@ -77,16 +82,16 @@ const Icube = () => {
           <source src={vok_ani} />
           Your browser does not support the video tag.
         </video>
-        {/* Video overlay for better text visibility */}
-        <div className="absolute inset-0 bg-black/30"></div>
-        {/* Blur edges */}
+        {/* Dark overlay for contrast */}
+        <div className="absolute -inset-1 bg-black/30"></div>
+        {/* Blur gradient top & bottom */}
         <div className="absolute top-0 left-0 w-full h-20 bg-gradient-to-b from-black via-black/50 to-transparent pointer-events-none"></div>
         <div className="absolute bottom-0 left-0 w-full h-20 bg-gradient-to-t from-black via-black/50 to-transparent pointer-events-none"></div>
       </div>
 
-      {/* Moving Foreground Motto Text */}
+      {/* Foreground Moving Text */}
       <div ref={textRef} className="w-full z-10 relative">
-        {/* Text glow effect */}
+        {/* Glow effect behind text */}
         <div className="absolute inset-0 blur-sm opacity-30">
           <TextPressure
             text="INITIATE . INFLUENCE . INSPIRE"
@@ -101,7 +106,8 @@ const Icube = () => {
             minFontSize={36}
           />
         </div>
-        
+
+        {/* Main Text */}
         <div className="flex items-center justify-center">
           <TextPressure
             text="INITIATE . INFLUENCE . INSPIRE"
@@ -118,7 +124,7 @@ const Icube = () => {
         </div>
       </div>
 
-      {/* Enhanced white particles for atmosphere */}
+      {/* Twinkling White Particles */}
       <div className="absolute inset-0 z-5 pointer-events-none">
         {Array.from({ length: 15 }, (_, i) => (
           <div
@@ -134,10 +140,18 @@ const Icube = () => {
         ))}
       </div>
 
+      {/* Keyframes */}
       <style jsx>{`
         @keyframes twinkle {
-          0%, 100% { opacity: 0.2; transform: scale(1); }
-          50% { opacity: 0.6; transform: scale(1.5); }
+          0%,
+          100% {
+            opacity: 0.2;
+            transform: scale(1);
+          }
+          50% {
+            opacity: 0.6;
+            transform: scale(1.5);
+          }
         }
       `}</style>
     </div>

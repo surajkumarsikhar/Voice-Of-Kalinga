@@ -18,9 +18,10 @@ const BlogCard = ({ blog }) => {
       </p>
       <Link
         to={`/your-stories/${blog._id}`}
-        className="text-amber-400 font-semibold font-quicksand hover:underline transition"
+        className="text-amber-400 font-semibold font-quicksand inline-flex items-center gap-1 hover:underline transition group"
       >
-        Read More →
+        Read More{" "}
+        <span className="group-hover:translate-x-1 transition-transform">→</span>
       </Link>
     </div>
   );

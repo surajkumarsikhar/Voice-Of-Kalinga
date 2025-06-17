@@ -19,7 +19,7 @@ import AdminDashboard from "./pages/AdminDashboard";
 
 const App = () => {
   return (
-    <div>
+    <div className="overflow-x-hidden">
       <Router>
         <Navbar />
         <Routes>

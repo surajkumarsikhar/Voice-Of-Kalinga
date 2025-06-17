@@ -3,37 +3,38 @@ import vok from "../assets/vok.mp4";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { useGSAP } from "@gsap/react";
-import logo from "../assets/logo.png"; 
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Video = () => {
   const containerRef = useRef(null);
 
-  useGSAP(
-    () => {
-      // Pin the section
-      ScrollTrigger.create({
-        trigger: containerRef.current,
-        start: "top top",
-        end: "+=140%",
-        pin: true,
-        scrub: true,
-      });
+  useGSAP(() => {
+    const isMobile = window.innerWidth < 640;
 
-      // Animate logo to center
-      gsap.from("#logo", {
-        y: 500,
-        opacity: 0,
-        scrollTrigger: {
-          trigger: "#page",
-          start: "top 0%",
-          end: "top -60%",
-          scrub: 2,
-        },
-      });
+    // Pin the section
+    ScrollTrigger.create({
+      trigger: containerRef.current,
+      start: "top top",
+      end: isMobile ? "+=60%" : "+=140%",
+      pin: true,
+      scrub: true,
+    });
 
-      // Animate blur on scroll
+    // Animate logo
+    gsap.from("#logo", {
+      y: isMobile ? 100 : 200,
+      scale: isMobile ? 1 : 0.8,
+      opacity: 0,
+      scrollTrigger: {
+        trigger: "#page",
+        start: "top 0%",
+        end: isMobile ? "top -40%" : "top -60%",
+        scrub: 2,
+      },
+    });
+
+    // Animate overlay blur
     gsap.fromTo(
       ".overlay",
       {
@@ -49,33 +50,30 @@ const Video = () => {
         scrollTrigger: {
           trigger: "#page",
           start: "top 0%",
-          end: "top -130%",
+          end: isMobile ? "top -60%" : "top -130%",
           scrub: 2,
         },
       }
     );
 
-      // Animate each word of the motto
-      gsap.utils.toArray(".motto-word").forEach((el, i) => {
-        gsap.from(el, {
-          y: 100,
-          opacity: 0,
-          scrollTrigger: {
-            trigger: "#page",
-            start: `${13 + i * 4}% top`,
-            end: `${15 + i * 2}% end`,
-            scrub: 2,
-            // markers:true
-          },
-        });
+    // Animate each motto word
+    gsap.utils.toArray(".motto-word").forEach((el, i) => {
+      gsap.from(el, {
+        y: 100,
+        opacity: 0,
+        scrollTrigger: {
+          trigger: "#page",
+          start: isMobile? `${2 + i * 4}% top` : `${13 + i * 4}% top`,
+          end: isMobile? `${5 + i * 2}% end` :`${15 + i * 2}% end`,
+          scrub: 2,
+        },
       });
-    },
-    { scope: containerRef }
-  );
+    });
+  }, { scope: containerRef });
 
   return (
     <>
-      <div ref={containerRef} className="relative h-screen w-full" id="page">
+      <div ref={containerRef} className="relative min-h-screen w-full" id="page">
         {/* Background Video */}
         <div className="absolute top-0 left-0 w-full h-full z-0">
           <video
@@ -84,33 +82,30 @@ const Video = () => {
             loop
             muted
             playsInline
-            className="w-full h-full object-cover"
+            className="absolute top-0 left-0 w-full h-full min-h-screen object-cover"
           />
         </div>
 
-        {/* Black Overlay */}
-        <div className="overlay absolute -inset-1 bg-black/90 z-20 backdrop-blur-none" />
+        {/* Overlay */}
+        <div className="overlay absolute -inset-1  z-20 bg-black/80 sm:bg-black/90 backdrop-blur-sm sm:backdrop-blur-none" />
 
-        {/* Animated Logo & Motto */}
-        <div className="absolute inset-0 z-30 flex flex-col items-center justify-center gap-4 px-4 text-center">
+        {/* Logo & Motto */}
+        <div className="absolute inset-0 z-30 flex flex-col items-center justify-center gap-6 sm:gap-6 px-4 text-center pt-16 sm:pt-0">
+          {/* Logo */}
           <h1
             id="logo"
-            className="text-white text-[12rem] md:text-[10rem] lg:text-[11rem] font-bold text-center drop-shadow-lg"
+            className="text-white text-[4rem] sm:text-[7rem] md:text-[9rem] lg:text-[10rem] font-bold drop-shadow-xl leading-none tracking-tight"
           >
             VOK
           </h1>
 
-          <div className="flex flex-wrap justify-center gap-2 text-white text-xl md:text-2xl lg:text-3xl ">
-            <span className="motto-word font-quicksand">Unheard Stories,</span>
-            {/* <span className="motto-word font-quicksand">Stories,</span> */}
-            <span className="motto-word font-quicksand">Documented Voices.</span>
-            {/* <span className="motto-word font-quicksand">Voices.</span> */}
+          {/* Motto */}
+          <div className="flex flex-col sm:flex-row flex-wrap justify-center items-center gap-1 sm:gap-2 text-white text-lg sm:text-xl md:text-2xl lg:text-3xl font-quicksand">
+            <span className="motto-word">Unheard Stories,</span>
+            <span className="motto-word">Documented Voices.</span>
           </div>
         </div>
       </div>
-
-      {/* Scrollable Content */}
-
     </>
   );
 };

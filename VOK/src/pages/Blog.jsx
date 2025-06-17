@@ -10,6 +10,7 @@ const Blog = () => {
   const [blog, setBlog] = useState(null);
   const imgRef = useRef(null);
 
+  // Fetch blog data
   useEffect(() => {
     axios
       .get(`${baseURL}/blogs/${id}`)
@@ -17,6 +18,7 @@ const Blog = () => {
       .catch((err) => console.error(err));
   }, [id]);
 
+  // Animate background image
   useEffect(() => {
     const img = imgRef.current;
     if (img) {
@@ -30,18 +32,15 @@ const Blog = () => {
         });
       };
 
-      if (img.complete) {
-        startAnimation();
-      } else {
-        img.onload = startAnimation;
-      }
+      if (img.complete) startAnimation();
+      else img.onload = startAnimation;
     }
   }, [blog]);
 
   return (
     <div className="relative min-h-screen bg-black text-white font-nunito overflow-hidden flex items-center justify-center px-4 py-20 md:py-32">
-
-      {/* Rotating Jhoti Image */}
+      
+      {/* Rotating Jhoti Background */}
       <img
         ref={imgRef}
         src={jhoti}
@@ -56,8 +55,8 @@ const Blog = () => {
         }}
       />
 
-      {/* Blog Content or Skeleton */}
-      <div className="relative z-10 w-full max-w-3xl md:max-w-4xl p-6 md:p-10 border border-white/10 bg-white/5 backdrop-blur-lg rounded-2xl shadow-2xl animate-fade-in">
+      {/* Blog Content */}
+      <div className="relative z-10 w-full max-w-3xl lg:max-w-4xl px-4 py-8 sm:px-8 sm:py-10 border border-white/10 bg-white/5 backdrop-blur-lg rounded-2xl shadow-2xl animate-fade-in">
         {blog ? (
           <>
             <h1 className="text-2xl sm:text-3xl md:text-5xl font-bold mb-4 md:mb-6 text-white leading-tight">
@@ -72,8 +71,9 @@ const Blog = () => {
           </>
         ) : (
           <>
-            <div className="h-8 w-3/4 bg-white/10 rounded animate-pulse mb-4"></div>
-            <div className="h-4 w-1/3 bg-white/10 rounded animate-pulse mb-6"></div>
+            {/* Skeleton Loading */}
+            <div className="h-8 w-3/4 bg-white/10 rounded animate-pulse mb-4" />
+            <div className="h-4 w-1/3 bg-white/10 rounded animate-pulse mb-6" />
             <div className="space-y-3">
               {[...Array(8)].map((_, i) => (
                 <div
@@ -87,7 +87,7 @@ const Blog = () => {
         )}
       </div>
 
-      {/* Custom CSS Animations */}
+      {/* Animations */}
       <style>{`
         @keyframes fade-in {
           from { opacity: 0; transform: translateY(30px); }

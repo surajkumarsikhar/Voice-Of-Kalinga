@@ -9,6 +9,7 @@ const Contact = () => {
   });
 
   const [status, setStatus] = useState("");
+  const [isError, setIsError] = useState(false);
 
   const handleChange = (e) => {
     setFormData((prev) => ({
@@ -20,9 +21,9 @@ const Contact = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    const serviceID = "service_tl1al1j";         // 🔁 replace with your EmailJS service ID
-    const templateID = "template_u9a4k6b";       // 🔁 replace with your EmailJS template ID
-    const userID = "dETZy5j14kzOP_cEE";            // 🔁 replace with your EmailJS public key
+    const serviceID = "service_tl1al1j";     // 🔁 Replace with your actual service ID
+    const templateID = "template_u9a4k6b";   // 🔁 Replace with your actual template ID
+    const userID = "dETZy5j14kzOP_cEE";      // 🔁 Replace with your public key
 
     const templateParams = {
       name: formData.name,
@@ -31,18 +32,18 @@ const Contact = () => {
       time: new Date().toLocaleString(),
     };
 
-    emailjs
-      .send(serviceID, templateID, templateParams, userID)
-      .then(
-        () => {
-          setStatus("Message sent successfully!");
-          setFormData({ name: "", email: "", message: "" });
-        },
-        (err) => {
-          setStatus("Failed to send message. Please try again later.");
-          console.error("EmailJS error:", err);
-        }
-      );
+    emailjs.send(serviceID, templateID, templateParams, userID).then(
+      () => {
+        setStatus("Message sent successfully!");
+        setIsError(false);
+        setFormData({ name: "", email: "", message: "" });
+      },
+      (err) => {
+        setStatus("Failed to send message. Please try again later.");
+        setIsError(true);
+        console.error("EmailJS error:", err);
+      }
+    );
   };
 
   return (
@@ -53,7 +54,7 @@ const Contact = () => {
 
       <form
         onSubmit={handleSubmit}
-        className="max-w-2xl mx-auto bg-white/5 p-8 rounded-xl space-y-6 backdrop-blur-md border border-white/10"
+        className="max-w-2xl mx-auto bg-white/5 p-8 rounded-2xl space-y-6 backdrop-blur-md border border-white/10 shadow-xl"
       >
         <input
           type="text"
@@ -62,7 +63,7 @@ const Contact = () => {
           onChange={handleChange}
           required
           placeholder="Your Name"
-          className="w-full p-3 bg-black/80 border border-white/10 rounded-md placeholder-white text-white focus:outline-none"
+          className="w-full p-3 bg-black/80 border border-white/10 rounded-md placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
         />
 
         <input
@@ -72,7 +73,7 @@ const Contact = () => {
           onChange={handleChange}
           required
           placeholder="Your Email"
-          className="w-full p-3 bg-black/80 border border-white/10 rounded-md placeholder-white text-white focus:outline-none"
+          className="w-full p-3 bg-black/80 border border-white/10 rounded-md placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
         />
 
         <textarea
@@ -82,18 +83,24 @@ const Contact = () => {
           required
           rows="5"
           placeholder="Your Message"
-          className="w-full p-3 bg-black/80 border border-white/10 rounded-md placeholder-white text-white focus:outline-none"
+          className="w-full p-3 bg-black/80 border border-white/10 rounded-md placeholder-white text-white focus:outline-none focus:ring-2 focus:ring-amber-400 transition"
         ></textarea>
 
         <button
           type="submit"
-          className="bg-white text-black px-6 py-3 rounded-md font-semibold hover:bg-gray-300 transition"
+          className="w-full bg-amber-400 text-black px-6 py-3 rounded-md font-semibold hover:bg-amber-300 transition"
         >
           Send Message
         </button>
 
         {status && (
-          <p className="text-sm text-green-400 pt-2 text-center">{status}</p>
+          <p
+            className={`text-sm text-center pt-2 ${
+              isError ? "text-red-400" : "text-green-400"
+            }`}
+          >
+            {status}
+          </p>
         )}
       </form>
     </div>
