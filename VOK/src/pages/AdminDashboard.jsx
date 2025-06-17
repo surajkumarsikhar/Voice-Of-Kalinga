@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import { LogOut } from "lucide-react";
-const baseURL = import.meta.env.VITE_API_BASE_URL;
 
+const baseURL = import.meta.env.VITE_API_BASE_URL;
 axios.defaults.withCredentials = true;
 
 const AdminDashboard = () => {
@@ -51,16 +51,10 @@ const AdminDashboard = () => {
 
   useEffect(() => {
     axios
-      .get(`${baseURL}/admin/verify`, { withCredentials: true })
-      .then(() => {
-        fetchBlogs();
-      })
-      .catch(() => {
-        window.location.href = "/admin";
-      })
-      .finally(() => {
-        setVerifying(false);
-      });
+      .get(`${baseURL}/admin/verify`)
+      .then(() => fetchBlogs())
+      .catch(() => (window.location.href = "/admin"))
+      .finally(() => setVerifying(false));
   }, []);
 
   if (verifying) {
@@ -68,18 +62,20 @@ const AdminDashboard = () => {
   }
 
   return (
-    <div className="min-h-screen bg-black text-white px-6 pt-28 pb-10 font-nunito">
-      <div className="flex justify-between items-center mb-8">
-        <h1 className="text-4xl font-bold">Admin Dashboard</h1>
+    <div className="min-h-screen bg-black text-white px-4 md:px-6 pt-24 pb-10 font-nunito">
+      {/* Header */}
+      <div className="flex flex-col md:flex-row justify-between items-center mb-8 gap-4">
+        <h1 className="text-3xl md:text-4xl font-bold text-center md:text-left">Admin Dashboard</h1>
         <button
           onClick={handleLogout}
-          className="flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600"
+          className="flex items-center gap-2 bg-red-500 text-white px-4 py-2 rounded hover:bg-red-600 transition"
         >
           <LogOut size={18} />
           Logout
         </button>
       </div>
 
+      {/* Tabs */}
       <div className="flex justify-center gap-4 mb-8">
         <button
           onClick={() => setActiveTab("unapproved")}
@@ -103,6 +99,7 @@ const AdminDashboard = () => {
         </button>
       </div>
 
+      {/* Blog Lists */}
       {loading ? (
         <p className="text-white/70 text-center">Loading blogs...</p>
       ) : activeTab === "unapproved" ? (
@@ -117,7 +114,7 @@ const AdminDashboard = () => {
                 onClick={() => setSelectedBlog(blog)}
               >
                 <h3 className="text-xl font-semibold mb-2">{blog.title}</h3>
-                <p className="text-sm text-white/70 line-clamp-3">{blog.content}</p>
+                <p className="text-sm text-white/70 line-clamp-3">{blog.body}</p>
                 <p className="mt-4 text-xs text-white/50">
                   Submitted on {new Date(blog.createdAt).toLocaleString()}
                 </p>
@@ -150,25 +147,23 @@ const AdminDashboard = () => {
         </div>
       )}
 
+      {/* Modal for full blog */}
       {selectedBlog && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50">
-          <div className="bg-white text-black p-8 rounded-xl max-w-xl w-full relative shadow-lg">
+        <div className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm flex items-center justify-center px-4">
+          <div className="bg-white text-black max-h-[90vh] overflow-y-auto w-full max-w-xl p-6 rounded-xl shadow-lg relative">
             <button
               onClick={() => setSelectedBlog(null)}
-              className="absolute top-3 right-3 text-gray-600 hover:text-black text-xl"
+              className="absolute top-3 right-4 text-2xl text-gray-600 hover:text-black"
             >
               &times;
             </button>
             <h2 className="text-2xl font-bold mb-4">{selectedBlog.title}</h2>
-            <p className="text-gray-800 whitespace-pre-wrap">{selectedBlog.body}</p>
+            <p className="whitespace-pre-wrap text-gray-800">{selectedBlog.body}</p>
             <div className="text-sm text-gray-500 mt-4 space-y-1">
               <p><strong>Author:</strong> {selectedBlog.author}</p>
               <p><strong>Email:</strong> {selectedBlog.email}</p>
               <p><strong>Phone:</strong> {selectedBlog.phoneNumber}</p>
-              <p>
-                <strong>Submitted:</strong>{" "}
-                {new Date(selectedBlog.createdAt).toLocaleString()}
-              </p>
+              <p><strong>Submitted:</strong> {new Date(selectedBlog.createdAt).toLocaleString()}</p>
             </div>
             <div className="flex justify-end gap-4 mt-6">
               <button
