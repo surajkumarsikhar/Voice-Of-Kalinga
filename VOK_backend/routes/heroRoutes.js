@@ -1,27 +1,39 @@
 const express = require("express");
 const router = express.Router();
-const HeroNomination = require("../models/HeroNomination");
-const verifyAdmin = require("../middlewares/verifyAdmin"); // import your middleware
+const HeroNomination = require("../models/hero");
+const upload = require("../middlewares/upload");
 
-// POST - Anyone can submit
-router.post("/nominate", async (req, res) => {
+// POST - Submit Nomination with optional photo
+router.post("/nominate", upload.single("photo"), async (req, res) => {
   try {
-    const nomination = new HeroNomination(req.body);
+    const {
+      yourName,
+      yourEmail,
+      yourPhone,
+      heroName,
+      heroLocation,
+      reason,
+      story,
+    } = req.body;
+
+    const photoUrl = req.file ? req.file.path : null;
+
+    const nomination = new HeroNomination({
+      yourName,
+      yourEmail,
+      yourPhone,
+      heroName,
+      heroLocation,
+      reason,
+      story,
+      photo: photoUrl,
+    });
+
     await nomination.save();
     res.status(201).json({ message: "Nomination submitted successfully." });
   } catch (err) {
     console.error("Nomination error:", err);
     res.status(400).json({ error: "Failed to submit nomination." });
-  }
-});
-
-// GET - Only Admin can fetch
-router.get("/nominations", verifyAdmin, async (req, res) => {
-  try {
-    const data = await HeroNomination.find().sort({ createdAt: -1 });
-    res.json(data);
-  } catch (err) {
-    res.status(500).json({ error: "Error fetching nominations." });
   }
 });
 

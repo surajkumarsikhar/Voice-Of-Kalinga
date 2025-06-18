@@ -14,6 +14,7 @@ import PostBlog from "./pages/PostBlog";
 import Footer from "./components/Footer";
 import AdminLogin from "./pages/AdminLogin";
 import AdminDashboard from "./pages/AdminDashboard";
+import NominateHero from "./pages/Nominate";
 
 
 
@@ -31,6 +32,7 @@ const App = () => {
           <Route path="/contact" element={<Contact />} />
           <Route path="/admin" element={<AdminLogin />} />
           <Route path="/admin-dashboard" element={<AdminDashboard />} />
+          <Route path="/nominate" element={<NominateHero />} />
         </Routes>
         <Footer />
       </Router>
