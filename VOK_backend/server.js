@@ -7,6 +7,7 @@ require('dotenv').config();
 const cloudinaryRoutes = require("./routes/cloudinaryVideos.js");
 const blogRoutes = require('./routes/blogRoutes');
 const authRoutes = require('./routes/authRoutes');
+const heroRoutes = require('./routes/heroRoutes');
 require('./config/db');
 
 const app = express();
@@ -27,6 +28,8 @@ app.use(cookieParser());
 app.use("/api", cloudinaryRoutes);
 app.use('/api/blogs', blogRoutes);
 app.use('/api/admin', authRoutes);
+app.use('/api', heroRoutes); // 👈 Now /api/nominate will work
+
 
 const PORT = process.env.PORT || 5000;
 app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
