@@ -12,8 +12,8 @@ router.post("/nominate", upload.single("photo"), async (req, res) => {
       yourPhone,
       heroName,
       heroLocation,
-      reason,
-      story,
+      whyNominate,
+      whatTheyDo,
     } = req.body;
 
     const photoUrl = req.file ? req.file.path : null;
@@ -24,9 +24,9 @@ router.post("/nominate", upload.single("photo"), async (req, res) => {
       yourPhone,
       heroName,
       heroLocation,
-      reason,
-      story,
-      photo: photoUrl,
+      whyNominate,
+      whatTheyDo,
+      photoUrl,
     });
 
     await nomination.save();
