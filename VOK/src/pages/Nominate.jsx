@@ -10,8 +10,8 @@ const NominateHero = () => {
     yourPhone: "",
     heroName: "",
     heroLocation: "",
-    reason: "",
-    story: "",
+    whyNominate: "",
+    whatTheyDo: "",
     photo: null,
   });
 
@@ -50,8 +50,8 @@ const NominateHero = () => {
         yourPhone: "",
         heroName: "",
         heroLocation: "",
-        reason: "",
-        story: "",
+    whyNominate: "",
+    whatTheyDo: "",
         photo: null,
       });
     } catch (err) {
@@ -148,10 +148,10 @@ const NominateHero = () => {
             💡 Why do you want to nominate them?
           </label>
           <textarea
-            name="reason"
+            name="whyNominate"
             rows="3"
             required
-            value={formData.reason}
+            value={formData.whyNominate}
             onChange={handleChange}
             placeholder="What makes them special?"
             className="w-full p-3 bg-black/70 border border-white/10 rounded-md text-white placeholder-white focus:outline-none"
@@ -164,10 +164,10 @@ const NominateHero = () => {
             📝 What do they do? (Story/Context)
           </label>
           <textarea
-            name="story"
+            name="whatTheyDo"
             rows="5"
             required
-            value={formData.story}
+            value={formData.whatTheyDo}
             onChange={handleChange}
             placeholder="Tell us their story..."
             className="w-full p-3 bg-black/70 border border-white/10 rounded-md text-white placeholder-white focus:outline-none"
