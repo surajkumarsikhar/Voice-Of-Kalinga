@@ -24,17 +24,16 @@ const Ourvision = () => {
       className="relative min-h-screen w-full bg-black px-4 sm:px-6 text-white flex items-center justify-center pt-20"
     >
       {/* Konark Wheel Background */}
-      <img
-        ref={wheelRef}
-        src={konarkWheel}
-        alt="Konark Wheel"
-        className="absolute z-0 opacity-10 w-[90%] sm:w-[60%] max-w-[700px] object-contain"
-        style={{
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-        }}
-      />
+     {/* Konark Wheel Background */}
+<div className="absolute inset-0 z-0 flex items-center justify-center pointer-events-none">
+  <img
+    ref={wheelRef}
+    src={konarkWheel}
+    alt="Konark Wheel"
+    className="opacity-10 w-[90%] sm:w-[60%] max-w-[700px] object-contain"
+  />
+</div>
+
 
       {/* Heading */}
       <h1 className="absolute top-10 sm:top-16 left-1/2 transform -translate-x-1/2 text-center text-3xl sm:text-5xl font-bold font-nunito z-20 tracking-tight">
