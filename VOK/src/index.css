@@ -20,24 +20,6 @@
   z-index: 20 !important;
 } */
 
-@keyframes floating {
-  0% {
-    transform: translateY(0) translateX(0);
-  }
-  50% {
-    transform: translateY(-20px) translateX(10px);
-  }
-  100% {
-    transform: translateY(0) translateX(0);
-  }
-}
-
-.animate-floating {
-  animation-name: floating;
-  animation-timing-function: ease-in-out;
-  animation-iteration-count: infinite;
-}
-
 
 
 /* @theme: {

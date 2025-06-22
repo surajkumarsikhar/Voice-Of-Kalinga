@@ -21,7 +21,7 @@ const Ourvision = () => {
   return (
     <section
       id="vision"
-      className="relative min-h-screen w-full bg-black px-4 sm:px-6 text-white flex items-center justify-center py-20"
+      className="relative min-h-screen w-full bg-black px-4 sm:px-6 text-white flex items-center justify-center pt-20"
     >
       {/* Konark Wheel Background */}
       <img
