@@ -16,7 +16,7 @@ const Video = () => {
     ScrollTrigger.create({
       trigger: containerRef.current,
       start: "top top",
-      end: "+=150%",
+      end: isMobile ? "+=65%" : "+=150%",
       pin: true,
       scrub: true,
     });
@@ -84,7 +84,7 @@ const Video = () => {
   }, { scope: containerRef });
 
   return (
-    <div ref={containerRef} className="relative min-h-screen w-full" id="page">
+    <div ref={containerRef} className="relative h-screen w-full" id="page">
       {/* Background Video */}
       <div className="absolute top-0 left-0 w-full h-full z-0">
         <video
