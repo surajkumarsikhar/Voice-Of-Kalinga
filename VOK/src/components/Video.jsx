@@ -71,16 +71,16 @@ const Video = () => {
     });
 4
     // Animate the "Nominate a Hero" button
-    gsap.from("#nominate-btn",{
-      y: 100,
-      opacity: 0,
-      scrollTrigger: {
-        trigger: "#page",
-        start: isMobile ? "top -30%" : "top -140%",
-        end: isMobile ? "top -60%" : "top -120%",
-        scrub: 2,
-      },
-    });
+    // gsap.from("#nominate-btn",{
+    //   y: 100,
+    //   opacity: 0,
+    //   scrollTrigger: {
+    //     trigger: "#page",
+    //     start: isMobile ? "top -30%" : "top -140%",
+    //     end: isMobile ? "top -60%" : "top -120%",
+    //     scrub: 2,
+    //   },
+    // });
   }, { scope: containerRef });
 
   return (
@@ -117,14 +117,14 @@ const Video = () => {
         </div>
 
         {/* CTA Button */}
-     <a
+     {/* <a
   id="nominate-btn"
   href="/nominate"
   className="mt-4 sm:mt-6 px-6 py-2 sm:py-3 sm:px-8 rounded-full border border-white text-white font-semibold text-base sm:text-lg 
              hover:bg-white hover:text-black scale-100 hover:scale-105"
 >
   Nominate a Hero
-</a>
+</a> */}
 
       </div>
     </div>
