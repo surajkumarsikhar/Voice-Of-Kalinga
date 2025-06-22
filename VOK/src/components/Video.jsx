@@ -79,7 +79,6 @@ const Video = () => {
         start: isMobile ? "top -30%" : "top -140%",
         end: isMobile ? "top -60%" : "top -120%",
         scrub: 2,
-        markers:true
       },
     });
   }, { scope: containerRef });
