@@ -64,7 +64,7 @@ const Navbar = () => {
         </ul>
 
         {/* Coffee Button */}
-        <a href="#" target="_blank" rel="noopener noreferrer">
+        <a href="https://coff.ee/surajkumarsikhar" target="_blank" rel="noopener noreferrer">
           <img src={coffeeLogo} alt="Buy Me A Coffee" className="h-8 w-auto invert" />
         </a>
       </nav>
