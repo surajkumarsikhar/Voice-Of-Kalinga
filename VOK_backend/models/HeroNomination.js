@@ -48,6 +48,10 @@ const heroNominationSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
   },
+  isApproved:{
+    type:Boolean,
+    default:false
+  }
 });
 
 module.exports = mongoose.model("HeroNomination", heroNominationSchema);
