@@ -16,7 +16,7 @@ const Video = () => {
     ScrollTrigger.create({
       trigger: containerRef.current,
       start: "top top",
-      end: isMobile ? "+=65%" : "+=150%",
+      end: isMobile ? "+=80%" : "+=150%",
       pin: true,
       scrub: true,
     });
@@ -63,7 +63,7 @@ const Video = () => {
         opacity: 0,
         scrollTrigger: {
           trigger: "#page",
-          start: isMobile ? `${2 + i * 4}% top` : `${13 + i * 4}% top`,
+          start: isMobile ? `${2 + i * 3}% top` : `${13 + i * 4}% top`,
           end: isMobile ? `${5 + i * 2}% end` : `${15 + i * 2}% end`,
           scrub: 2,
         },
@@ -76,7 +76,7 @@ const Video = () => {
       opacity: 0,
       scrollTrigger: {
         trigger: "#page",
-        start: isMobile ? "top -30%" : "top -140%",
+        start: isMobile ? "top -60%" : "top -140%",
         end: isMobile ? "top -60%" : "top -120%",
         scrub: 2,
       },
